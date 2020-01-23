@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { parseByYear, sortByPoints } from "../utils/QuestionsHandler";
+import { filterByYear, sortByPoints } from "../utils/QuestionsHandler";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 
+//gameboard manages each instance of a game, handling
+//the available list of questions for various point values
+//future enhancements would include handling of a player
+//component that stores which questions a player has answered
 class GameBoard extends Component {
   state = {
     questions: {
@@ -17,19 +21,23 @@ class GameBoard extends Component {
     questionsDisplayed: 5
   };
 
+  //on mount, the jeopardy api is called for all science category questions
   async componentDidMount() {
-    //call api for questions in the science category
     const questions = await axios.get(
       "http://www.jservice.io/api/category?id=25"
     );
-    const parsedQuestions = parseByYear(questions.data, 1996);
-    const sortedQuestions = sortByPoints(parsedQuestions);
+    //questions are filtered by year and sorted by point value
+    const filteredQuestions = filterByYear(questions.data, 1996);
+    const sortedQuestions = sortByPoints(filteredQuestions);
     this.setState({ questions: sortedQuestions });
   }
 
+  //logic around which questions should be rendered,
+  //along with error handling when none are available
   renderQuestions() {
     const { questions, questionsDisplayed } = this.state;
-    if (questions.clues_count === 0) return "No questions available";
+    if (!questions.clues_count || questions.clues_count === 0)
+      return "No questions available";
 
     let result = [];
     for (let i = 1; i < questionsDisplayed + 1; i++) {
@@ -57,13 +65,19 @@ class GameBoard extends Component {
     return result;
   }
 
+  //to do: remove old question from the list so the next question can be displayed
   updateQuestion(value) {
     console.log("next question");
   }
 
   render() {
     return (
-      <Row className="justify-content-md-center">{this.renderQuestions()}</Row>
+      <Row
+        className="justify-content-md-center
+      gameBoard__content"
+      >
+        {this.renderQuestions()}
+      </Row>
     );
   }
 }

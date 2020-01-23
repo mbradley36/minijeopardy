@@ -1,7 +1,7 @@
-export function parseByYear(questions, year) {
+export function filterByYear(questions, year) {
   //check year on each date in questions list
   const cluesInYear = questions.clues.filter(
-    q => new Date(Date.parse(q.airdate)).getFullYear() === 1996
+    q => new Date(Date.parse(q.airdate)).getFullYear() === year
   );
   //reassign the returned questions to the filtered set and update count
   questions.clues = cluesInYear;
@@ -9,6 +9,7 @@ export function parseByYear(questions, year) {
   return questions;
 }
 
+//break questions list into lists for each point value
 export function sortByPoints(questions) {
   questions.clues100 = questions.clues.filter(q => q.value === 100);
   questions.clues200 = questions.clues.filter(q => q.value === 200);
