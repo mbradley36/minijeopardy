@@ -27,15 +27,15 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### To Do Items
+## To Do Items
 
-*More research to see if the API has a built in way to pull only the required date range
-*updateQuestion in GameBoard should remove the previous question from the list so that the next question can be rendered
-*rewrite the sortByPoints function in QuestionsHandler so that it's only going through the array once
-*More work on styling
-*Set up logging for errors
-*Create a user component that keeps track of what question IDs they've seen before.
-	*Gameboard can check this list when calling the API so repeat questions are not displayed.
-	*Tests to ensure seen questions are being stored and filtered out properly.
+* More research to see if the API has a built in way to pull only the required date range
+* updateQuestion in GameBoard should remove the previous question from the list so that the next question can be rendered
+* rewrite the sortByPoints function in QuestionsHandler so that it's only going through the array once
+* More work on styling
+* Set up logging for errors
+* Create a user component that keeps track of what question IDs they've seen before.
+  * Gameboard can check this list when calling the API so repeat questions are not displayed.
+  * Tests to ensure seen questions are being stored and filtered out properly.
 
 Contact [Miranda Huet](mailto:mirandajhuet@gmail.com) with any additional questions.
